@@ -1,311 +1,21 @@
 /* 
  * File:   main.cpp
  * Author: Sonia Szeton, Connor Fitzgerald
- *
+ *CLASS
  * Created on April 23, 2015, 4:24 PM
  */
 
-#include <cstdlib>
+//#include <cstdlib>
 #include <iostream>
-#include <fstream>
+//#include <fstream>
 #include <string>
-#include <vector>
-#include <queue>
+//#include <vector>
+//#include <queue>
+#include "character.h"
 
 using namespace std;
 
-// Creating the node for the Hunger Games Quest
-struct HG_Situation {
-    string scenario;
-    int score1;
-    int score2;
-    int score3;
-    int score4;
-};
 
-class Character {
-private:
-    bool HP_Complete;
-    bool HG_Complete;
-    bool LOTR_Complete;
-    bool poke_Complete;
-    string player_name;
-    int district;
-    string pokemon;
-    string rival_pokemon;
-    string weapon;
-    int strength;
-    int age;
-    int survivalOdd;
-public:
-    Character() {
-        HP_Complete = false;
-        HG_Complete = false;
-        LOTR_Complete = false;
-        poke_Complete = false;
-        player_name = "None";
-        district = 0;
-        age = 0;
-        survivalOdd = 0;
-        pokemon = "None";
-        rival_pokemon = "None";
-        weapon = "None";
-        strength = 50;
-    }
-    int calcSurvival(int district, int age);
-    int setSurvival(int answer, HG_Situation scenario);
-    void setPokemon(string user_poke);
-    void evolvePokemon();
-    void setWeapon(string weapon_choice);
-    void setStrength(int newStrength);
-    void setHP_Comp();
-    void setHG_Comp();
-    void setLOTR_Comp();
-    void setpoke_Comp();
-    void printInfo();
-
-};
-
-// Calculate the starting survival odd of a character based on age and district
-// Districts 1,2,4 are elite "Career" and give the highest chance of survival
-// The other districts are weighted by what their district's specialty is (agriculture, electronics, textiles, ect)
-// For age the chances of a 12 year old winning are a lot smaller than those of an 18 year old
-// The weights of each are added together to give the user a starting survival odd
-int Character::calcSurvival(int district, int age) {
-    int initial_survivalOdd = 0;
-    switch (district) {
-        case 1:
-        {
-            initial_survivalOdd += 5;
-            break;
-        }
-        case 2:
-        {
-            initial_survivalOdd += 5;
-            break;
-        }
-        case 3:
-        {
-            initial_survivalOdd += 3;
-            break;
-        }
-        case 4:
-        {
-            initial_survivalOdd += 5;
-            break;
-        }
-        case 5:
-        {
-            initial_survivalOdd += 3;
-            break;
-        }
-        case 6:
-        {
-            initial_survivalOdd += 2;
-            break;
-        }
-        case 7:
-        {
-            initial_survivalOdd += 4;
-            break;
-        }
-        case 8:
-        {
-            initial_survivalOdd += 1;
-            break;
-        }
-        case 9:
-        {
-            initial_survivalOdd += 1;
-            break;
-        }
-        case 10:
-        {
-            initial_survivalOdd += 2;
-            break;
-        }
-        case 11:
-        {
-            initial_survivalOdd += 3;
-            break;
-        }
-        case 12:
-        {
-            initial_survivalOdd += 2;
-            break;
-        }
-    }
-    switch (age) {
-        case 12:
-        {
-            initial_survivalOdd += 1;
-            break;
-        }
-        case 13:
-        {
-            initial_survivalOdd += 1;
-            break;
-        }
-        case 14:
-        {
-            initial_survivalOdd += 2;
-            break;
-        }
-        case 15:
-        {
-            initial_survivalOdd += 3;
-            break;
-        }
-        case 16:
-        {
-            initial_survivalOdd += 3;
-            break;
-        }
-        case 17:
-        {
-            initial_survivalOdd += 4;
-            break;
-        }
-        case 18:
-        {
-            initial_survivalOdd += 5;
-            break;
-        }
-    }
-    return initial_survivalOdd;
-}
-
-// This updates the player's survival odd as they go through each scenario
-// Smart decisions yield positive scores, bad decisions give negative scores
-int Character::setSurvival(int answer, HG_Situation scenario) {
-    int survivalScore = 0;
-    switch (answer) {
-        case 1:
-        {
-            survivalScore += scenario.score1;
-            break;
-        }
-        case 2:
-        {
-            survivalScore += scenario.score2;
-            break;
-        }
-        case 3:
-        {
-            survivalScore += scenario.score3;
-            break;
-        }
-        case 4:
-        {
-            survivalScore += scenario.score4;
-            break;
-        }
-        default:
-        {
-            cout << "Invalid choice" << endl;
-        }
-    }
-    return survivalScore;
-}
-
-// updates the strength of the player as they move through the Lord of the Rings and Pokemon quests 
-void Character::setStrength(int newStrength) {
-    strength += newStrength;
-    cout << "Your strength has increased by " << newStrength << " to " << strength << "!" << endl;
-}
-
-// sets player's pokemon
-void Character::setPokemon(string user_poke) {
-    pokemon = user_poke;
-}
-
-// If the player wins the pokemon battle their pokemon evolves and their strength increases
-void Character::evolvePokemon() {
-
-    cout << endl;
-    cout << "What? Your " + pokemon + " is evolving!" << endl;
-
-    if (pokemon == "Bulbasaur") {
-        setPokemon("Ivysaur");
-        cout << "Your Bulbasaur has evolved into Ivysaur!" << endl;
-    } else if (pokemon == "Charmander") {
-        setPokemon("Charmeleon");
-        cout << "Your Charmander has evolved into Charmeleon!" << endl;
-    } else if (pokemon == "Squirtle") {
-        setPokemon("Wartortle");
-        cout << "Your Squirtle has evovled into Wartortle!" << endl;
-    } else if (pokemon == "Ivysaur") {
-        setPokemon("Venusaur");
-        cout << "Your Ivysaur has evolved into Venusaur!" << endl;
-    } else if (pokemon == "Charmeleon") {
-        setPokemon("Charizard");
-        cout << "Your Charmeleon has evolved into Charizard!" << endl;
-    } else if (pokemon == "Wartortle") {
-        setPokemon("Blastoise");
-        cout << "Your Wartortle has evolved into Blastoise!" << endl;
-    }
-
-    setStrength(25);
-
-}
-
-// set user weapon
-void Character::setWeapon(string weapon_choice) {
-    weapon = weapon_choice;
-}
-
-// set when the player completes the Hunger Games quest
-void Character::setHG_Comp() {
-    HG_Complete = true;
-}
-
-// set when the player completes the Lord of the Rings quest
-void Character::setLOTR_Comp() {
-    LOTR_Complete = true;
-}
-
-// set when the player completes the Pokemon quest
-void Character::setpoke_Comp() {
-    poke_Complete = true;
-}
-
-// Prints the info of the player, changes as they complete quests
-void Character::printInfo() {
-    cout << "====Player Information====" << endl;
-    cout << "Name: " << player_name << endl;
-    if (HG_Complete) {
-        cout << "Age: " << age << endl;
-        cout << "District: " << district << endl;
-        cout << "Hunger Games Status: Survived" << endl;
-    }
-    if (poke_Complete) {
-        cout << "Pokemon: " << pokemon << endl;
-        cout << "Pokemon Trainer Status: Champion" << endl;
-    }
-    if (LOTR_Complete) {
-        cout << "Weapon: " << weapon << endl;
-        cout << "Helm's Deep: Defended" << endl;
-    }
-    if (HP_Complete) {
-        cout << "Sorcerer's Stone: Secured" << endl;
-    }
-    cout << "Strength: " << strength << endl;
-    cout << "Code: ";
-    if(HP_Complete) {
-        cout << "si ";
-    }
-    if(HG_Complete) {
-        cout << "curetrusts ";
-    }
-    if(poke_Complete) {
-        cout << "tada ";
-    }
-    if(LOTR_Complete) {
-        cout << "nfu" << endl;
-    }
-    
-
-}
 
 // Creating the node for the Harry Potter world array
 struct HP_Chamber {
@@ -314,6 +24,8 @@ struct HP_Chamber {
     int correct_answer;
     string correct_response;
 };
+
+//struct for Hunger Games is within the character.h file
 
 // Creating the array that makes Harry Potter world
 HP_Chamber Harry_Potter[6];
@@ -340,11 +52,6 @@ struct lotr_battle {
 // Creating array for Lord of the Rings realm
 lotr_battle LotR[9];
 
-// set when player completes Harry Potter quest
-void Character::setHP_Comp() {
-    HP_Complete = true;
-}
-
 int main(int argc, char** argv) {
 
     // Creating new Character that the user will be
@@ -363,7 +70,7 @@ int main(int argc, char** argv) {
     fluffy.correct_response = "\nThe flute's song causes the 3 headed dog to fall asleep instantly. You push his paw away to reveal a trap door and jump into the pitch black void.\n";
     Harry_Potter[0] = fluffy;
 
-    // Chamber #2
+   // Chamber #2
     HP_Chamber devilSnare;
     devilSnare.name = "Devil's Snare";
     devilSnare.question = "\nDevil's snare cushions your fall. Thick vines start to wrap around your body intent on choking you. What do you do?\n"
@@ -385,8 +92,8 @@ int main(int argc, char** argv) {
     keys.correct_answer = 3;
     keys.correct_response = "\nCorrect. Only the seeker may catch the snitch whether they are injured or not. Your knowledge of quidditch serves you well and you are able to snag the correct key.\n";
     Harry_Potter[2] = keys;
-
-    // Chamber #4
+	
+	// Chamber #4
     HP_Chamber chess;
     chess.name = "Chess Board";
     chess.question = "\nThe door opens to reveal a massive chess board with 10 feet tall pieces. They block the path to the next door, can you play your way across the room?\n"
@@ -395,7 +102,7 @@ int main(int argc, char** argv) {
     chess.correct_response = "\nYou've outsmarted the queen and reached the next door.\n";
     Harry_Potter[3] = chess;
 
-    // Chamber #5
+	// Chamber #5
     HP_Chamber potions;
     potions.name = "Snape's Riddle";
     potions.question = "\nPurple flames block the door you just came through while black flames ignite in front of the next door. A table with 7 unmarked bottles sits in front of you with a piece of parchment that reads:\n"
@@ -428,7 +135,7 @@ int main(int argc, char** argv) {
     potions.correct_response = "\nYou drink the potion and step through the black flames and successfully reach the final door.\n";
     Harry_Potter[4] = potions;
 
-    // Chamber #6
+	// Chamber #6
     HP_Chamber quirrell;
     quirrell.name = "\nThe Final Chamber\n";
     quirrell.question = "\n'You!' 'Me. I wondered whether I'd be meeting you here.' Standing in front of the Mirror of Erised is not Snape, but none other than Brett, the TA! Bret can't seem to get the stone from the Mirror, he tells you to look in the Mirror.\n"
@@ -443,7 +150,7 @@ int main(int argc, char** argv) {
     Harry_Potter[5] = quirrell;
 
     // Constructing the Hunger Games
-    // Scenario #1
+	// Scenario #1
     HG_Situation cornucopia;
     cornucopia.scenario = "\nBANG! The 76th Annual Hunger Games have begun! Most of the weapons and supplies are concentrated in the Cornucopia with some backpacks and weapons scattered throughout the rest of the clearing. A lake lies to the left of the Conucopia and there's forest behind you.\n"
             "What's your plan?\n"
@@ -456,8 +163,8 @@ int main(int argc, char** argv) {
     cornucopia.score3 = 1;
     cornucopia.score4 = 0;
     Hunger_Games[0] = cornucopia;
-
-    // Scenario #2
+	
+	// Scenario #2
     HG_Situation dehydration;
     dehydration.scenario = "\nYou're in the forest miles from the Cornucopia. You are hungry and in desperate need of water. You passed a small spring with a tent near it a mile back.\n"
             "How do you proceed?\n"
@@ -470,8 +177,8 @@ int main(int argc, char** argv) {
     dehydration.score3 = -1;
     dehydration.score4 = 1;
     Hunger_Games[1] = dehydration;
-
-    // Scenario #3
+	
+	// Scenario #3
     HG_Situation weapons;
     weapons.scenario = "\nYou spot an unoccupied camp site. From your hiding place you can see a trident, an axe, a coil of wire, and a bow and arrow.\n"
             "You only have time to grab one, which do you choose?\n"
@@ -485,7 +192,7 @@ int main(int argc, char** argv) {
     weapons.score4 = 1;
     Hunger_Games[2] = weapons;
 
-    // Scenario #4
+	// Scenario #4
     HG_Situation fight_or_flight;
     fight_or_flight.scenario = "\nYou've made your way back to the Cornucopia looking to snag some food. The district 4 Career spots you and is charging towards you.\n"
             "What do you do?\n"
@@ -498,8 +205,8 @@ int main(int argc, char** argv) {
     fight_or_flight.score3 = -1;
     fight_or_flight.score4 = -1;
     Hunger_Games[3] = fight_or_flight;
-
-    // Scenario #5
+	
+	// Scenario #5
     HG_Situation night;
     night.scenario = "\nNight has fallen and the temperature has dropped. From the cave you've found to sleep in you spot the light of a fire a few hundred yards away.\n"
             "You're freezing cold, what do you do?\n"
@@ -513,7 +220,7 @@ int main(int argc, char** argv) {
     night.score4 = 1;
     Hunger_Games[4] = night;
 
-    // Scenario #6
+	// Scenario #6
     HG_Situation finale;
     finale.scenario = "\nThe 76th Hunger Games are coming to a close. You and the boy from district 2 are the only ones left. \n"
             "To claim the victor's crown you must face him in the final battle. What is your strategy?\n"
@@ -529,10 +236,10 @@ int main(int argc, char** argv) {
 
     //constructing the pokemon world
     poke_battle Ash_grass;
-    Ash_grass.question = "\n'Wow! A " + user.pokemon + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
+    Ash_grass.question = "\n'Wow! A " + user.getPokemon() + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
             "'So, Professor Oak is giving you a Pokemon too! That's great!'\n"
             "'We should have a battle!'\n"
-            "You send out your brand new " + user.pokemon + ", and Ash sends out his Pikachu.\n"
+            "You send out your brand new " + user.getPokemon() + ", and Ash sends out his Pikachu.\n"
 
             "\nWhat move will you use? \n"
             "1. Spark- Electric type\n"
@@ -542,35 +249,35 @@ int main(int argc, char** argv) {
 
     Ash_grass.correct_move = 2;
     Ash_grass.correct_response = "\nYour move was super effective! Pikachu was knocked out in one hit!\n";
-    Ash_grass.incorrect_response = "\nYour move was not very effective! Pikachu countered with Volt Tackle, his signature move, and " + user.pokemon + " was knocked out in one hit!\n";
+    Ash_grass.incorrect_response = "\nYour move was not very effective! Pikachu countered with Volt Tackle, his signature move, and " + user.getPokemon() + " was knocked out in one hit!\n";
     Pokemon[0] = Ash_grass;
 
     poke_battle Rival_grass;
     Rival_grass.question = "\n'That was a fun battle!' Ash exclaims.\n"
             "The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'\n"
             "'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'\n"
-            "'I'll take whatever is super-effective against " + user.player_name + "'s Pokemon, because that's just the type of guy I am,' says TA .\n"
-            "'Alright then, here's your " + user.rival_pokemon + ",' says Professor Oak, handing him the " + user.rival_pokemon + ".\n"
-            "Now let's battle, " + user.player_name + "!\n"
-            "You send out your " + user.pokemon + ", and TA Matt sends out his " + user.rival_pokemon + ".\n"
+            "'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA .\n"
+            "'Alright then, here's your Charmander,' says Professor Oak, handing him the Charmander.\n"
+            "Now let's battle, " + user.getName() + "!\n"
+            "You send out your " + user.getPokemon() + ", and TA Matt sends out his Charmander.\n"
 
-            "What move will " + user.pokemon + " use?\n"
+            "What move will " + user.getPokemon() + " use?\n"
             "1. Tackle- Normal type\n"
             "2. Ember- Fire type\n"
             "3. Water Gun- Water type\n"
             "4. Vine Whip- Grass type\n";
 
     Rival_grass.correct_move = 3;
-    Rival_grass.correct_response = "\nYour move was super effective! " + user.rival_pokemon + " was knocked out in one hit!\n";
-    Rival_grass.incorrect_response = "\nYour move wasn't very effective, " + user.rival_pokemon + " coutered and " + user.pokemon + " was knocked out in one hit!\n";
+    Rival_grass.correct_response = "\nYour move was super effective! Charmander was knocked out in one hit!\n";
+    Rival_grass.incorrect_response = "\nYour move wasn't very effective, Charmander countered and " + user.getPokemon() + " was knocked out in one hit!\n";
     Pokemon[1] = Rival_grass;
 
 
     poke_battle Ash_fire;
-    Ash_fire.question = "\n'Wow! A " + user.pokemon + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
+    Ash_fire.question = "\n'Wow! A " + user.getPokemon() + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
             "'So, Professor Oak is giving you a Pokemon too! That's great!'\n"
             "'We should have a battle!'\n"
-            "You send out your brand new " + user.pokemon + ", and Ash sends out his Pikachu.\n"
+            "You send out your brand new " + user.getPokemon() + ", and Ash sends out his Pikachu.\n"
 
             "\nWhat move will you use? \n"
             "1. Spark- Electric type\n"
@@ -580,35 +287,35 @@ int main(int argc, char** argv) {
 
     Ash_fire.correct_move = 2;
     Ash_fire.correct_response = "\nYour move was super effective! Pikachu was knocked out in one hit!\n";
-    Ash_fire.incorrect_response = "\nYour move was not very effective! Pikachu countered with Volt Tackle, his signature move, and " + user.pokemon + " was knocked out in one hit!\n";
+    Ash_fire.incorrect_response = "\nYour move was not very effective! Pikachu countered with Volt Tackle, his signature move, and " + user.getPokemon() + " was knocked out in one hit!\n";
     Pokemon[2] = Ash_fire;
 
     poke_battle Rival_fire;
     Rival_fire.question = "\n'That was a fun battle!' Ash exclaims.\n"
             "The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'\n"
             "'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'\n"
-            "'I'll take whatever is super-effective against " + user.player_name + "'s Pokemon, because that's just the type of guy I am,' says TA Matt.\n"
-            "'Alright then, here's your " + user.rival_pokemon + ",' says Professor Oak, handing him the " + user.rival_pokemon + ".\n"
-            "Now let's battle, " + user.player_name + "!\n"
-            "You send out your " + user.pokemon + ", and TA Matt sends out his " + user.rival_pokemon + ".\n"
+            "'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA Matt.\n"
+            "'Alright then, here's your Squirtle,' says Professor Oak, handing him the Squirtle.\n"
+            "Now let's battle, " + user.getName() + "!\n"
+            "You send out your " + user.getPokemon() + ", and TA Matt sends out his Squirtle.\n"
 
-            "What move will " + user.pokemon + " use?\n"
+            "What move will " + user.getPokemon() + " use?\n"
             "1. Tackle- Normal type\n"
             "2. Ember- Fire type\n"
             "3. Water Gun- Water type\n"
             "4. Vine Whip- Grass type\n";
 
     Rival_fire.correct_move = 4;
-    Rival_fire.correct_response = "\nYour move was super effective! " + user.rival_pokemon + " was knocked out in one hit!\n";
-    Rival_fire.incorrect_response = "\nYour move wasn't very effective, " + user.rival_pokemon + " coutered and " + user.pokemon + " was knocked out in one hit!\n";
+    Rival_fire.correct_response = "\nYour move was super effective! Squirtle was knocked out in one hit!\n";
+    Rival_fire.incorrect_response = "\nYour move wasn't very effective, Squirtle countered and " + user.getPokemon() + " was knocked out in one hit!\n";
     Pokemon[3] = Rival_fire;
 
 
     poke_battle Ash_water;
-    Ash_water.question = "\n'Wow! A " + user.pokemon + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
+    Ash_water.question = "\n'Wow! A " + user.getPokemon() + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
             "'So, Professor Oak is giving you a Pokemon too! That's great!'\n"
             "'We should have a battle!'\n"
-            "You send out your brand new " + user.pokemon + ", and Ash sends out his Pikachu.\n"
+            "You send out your brand new " + user.getPokemon() + ", and Ash sends out his Pikachu.\n"
 
             "\nWhat move will you use? \n"
             "1. Spark- Electric type\n"
@@ -618,29 +325,97 @@ int main(int argc, char** argv) {
 
     Ash_water.correct_move = 2;
     Ash_water.correct_response = "\nYour move was super effective! Pikachu was knocked out in one hit!\n";
-    Ash_water.incorrect_response = "\nYour move was not very effective! Pikachu countered with Volt Tackle, his signature move, and " + user.pokemon + " was knocked out in one hit!\n";
+    Ash_water.incorrect_response = "\nYour move was not very effective! Pikachu countered with Volt Tackle, his signature move, and " + user.getPokemon() + " was knocked out in one hit!\n";
     Pokemon[4] = Ash_water;
 
     poke_battle Rival_water;
     Rival_water.question = "\n'That was a fun battle!' Ash exclaims.\n"
             "The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'\n"
             "'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'\n"
-            "'I'll take whatever is super-effective against " + user.player_name + "'s Pokemon, because that's just the type of guy I am,' says TA Matt.\n"
-            "'Alright then, here's your " + user.rival_pokemon + ",' says Professor Oak, handing him the " + user.rival_pokemon + ".\n"
-            "Now let's battle, " + user.player_name + "!\n"
-            "You send out your " + user.pokemon + ", and TA Matt sends out his " + user.rival_pokemon + ".\n"
+            "'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA Matt.\n"
+            "'Alright then, here's your Bulbasaur,' says Professor Oak, handing him the Bulbasaur.\n"
+            "Now let's battle, " + user.getName() + "!\n"
+            "You send out your " + user.getPokemon() + ", and TA Matt sends out his Bulbasaur.\n"
 
-            "What move will " + user.pokemon + " use?\n"
+            "What move will " + user.getPokemon() + " use?\n"
             "1. Tackle- Normal type\n"
             "2. Ember- Fire type\n"
             "3. Water Gun- Water type\n"
             "4. Vine Whip- Grass type\n";
 
     Rival_water.correct_move = 2;
-    Rival_water.correct_response = "\nYour move was super effective! " + user.rival_pokemon + " was knocked out in one hit!\n";
-    Rival_water.incorrect_response = "\nYour move wasn't very effective, " + user.rival_pokemon + " coutered and " + user.pokemon + " was knocked out in one hit!\n";
+    Rival_water.correct_response = "\nYour move was super effective! Bulbasaur was knocked out in one hit!\n";
+    Rival_water.incorrect_response = "\nYour move wasn't very effective, Bulbasaur countered and " + user.getPokemon() + " was knocked out in one hit!\n";
     Pokemon[5] = Rival_water;
 
+    //building lotr battle outcomes
+
+    lotr_battle Spear_Front;
+    Spear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
+            "Fortunately, you did. The battle goes well for you and Aragorn. You help him lead the men on the front lines, and the men of Rohan hold Helm's Deep through the siege.\n"
+            "For fighting with him valiantly, Aragorn rewards you with his token, a golden medallion with a crown on it. Gazing on it fills you with courage.\n";
+    LotR[0] = Spear_Front;
+
+    lotr_battle notSpear_Front;
+    notSpear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
+            "Unfortunately, you didn't. The battle goes poorly for you and Aragorn. The Urukhai break through your front lines, but men in other parts of the keep drive them off.\n"
+            "No thanks to you, the men of Rohan hold Helm's Deep through the siege.\n";
+    LotR[1] = notSpear_Front;
+
+    lotr_battle strSpear_Front;
+    Spear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
+            "You didn't, but fortunately your strength allows you to use your " + user.getWeapon() + " to great effect. You help him lead the men on the front lines, and the men of Rohan hold Helm's Deep through the siege.\n"
+            "For fighting with him valiantly, Aragorn rewards you with his token, a golden medallion with a crown on it. Gazing on it fills you with courage.\n";
+    LotR[2] = Spear_Front;
+
+    lotr_battle Sword_Keep;
+    Sword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
+            "Fortunately, you do. The battle goes well for you and Gimli. You help him lead the brawl in the inner keep, and the men of Rohan hold Helm's Deep through the siege.\n"
+            "For fighting with him valiantly, Gimli rewards you with his token, a stone medallion with a hammer on it. Gazing on it fills you with strength.\n";
+    LotR[3] = Sword_Keep;
+
+    lotr_battle notSword_Keep;
+    notSword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
+            "Unfortunately, you don't. The battle goes poorly for you and Gimli. The Urukhai wreak havoc in the inner keep, but men in other parts of the keep drive them off./n"
+            "No thanks to you, the men of Rohan hold Helm's Deep through the siege./n";
+    LotR[4] = notSword_Keep;
+
+    lotr_battle strSword_Keep;
+    Sword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
+            "You don't, but fortunately your strength allows you to use your " + user.getWeapon() + " to great effect. You help him lead the brawl in the inner keep, and the men of Rohan hold Helm's Deep through the siege.\n"
+            "For fighting with him valiantly, Gimli rewards you with his token, a stone medallion with a hammer on it. Gazing on it fills you with strength.\n";
+    LotR[5] = Sword_Keep;
+
+    lotr_battle Bow_Walls;
+    Bow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
+            "You don't, but fortunately your strength allows you to use your " + user.getWeapon() + " to great effect. You help him hold off Urukhai from the walls, and the men of Rohan hold Helm's Deep through the siege.\n"
+            "For fighting with him valiantly, Legolas rewards you with his token, a green gemstone medallion shaped like a leaf. Gazing on it fills you with calm.\n";
+    LotR[6] = Bow_Walls;
+
+    lotr_battle notBow_Walls;
+    notBow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
+            "Unfortunately, you don't. The battle goes poorly for you and Legolas. You serve no purpose on the castle walls, but men in other parts of the keep drive them off.\n"
+            "No thanks to you, the men of Rohan hold Helm's Deep through the siege.\n";
+    LotR[7] = notBow_Walls;
+
+    lotr_battle strBow_Walls;
+    Bow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
+            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
+            "Fortunately, you do. The battle goes well for you and Legolas. You help him shoot down Urukhai from the walls, and the men of Rohan hold Helm's Deep through the siege.\n"
+            "For fighting with him valiantly, Legolas rewards you with his token, a green gemstone medallion shaped like a leaf. Gazing on it fills you with calm.\n";
+    LotR[8] = Bow_Walls;
+    
+    // Worlds have been constructed
+    // User begins to interact with them
+    
     string user_command;
     string user_name;
     string user_district;
@@ -649,81 +424,15 @@ int main(int argc, char** argv) {
     string user_weapon;
     string user_station;
 
-    //building lotr battle outcomes
-    lotr_battle Spear_Front;
-    Spear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
-            "Fortunately, you did. The battle goes well for you and Aragorn. You help him lead the men on the front lines, and the men of Rohan hold Helm's Deep through the siege.\n"
-            "For fighting with him valiantly, Aragorn rewards you with his token, a golden medallion with a crown on it. Gazing on it fills you with courage.\n";
-    LotR[0] = Spear_Front;
-
-    lotr_battle notSpear_Front;
-    notSpear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
-            "Unfortunately, you didn't. The battle goes poorly for you and Aragorn. The Urukhai break through your front lines, but men in other parts of the keep drive them off.\n"
-            "No thanks to you, the men of Rohan hold Helm's Deep through the siege.\n";
-    LotR[1] = notSpear_Front;
-
-    lotr_battle strSpear_Front;
-    Spear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
-            "You didn't, but fortunately your strength allows you to use your " + user.weapon + " to great effect. You help him lead the men on the front lines, and the men of Rohan hold Helm's Deep through the siege.\n"
-            "For fighting with him valiantly, Aragorn rewards you with his token, a golden medallion with a crown on it. Gazing on it fills you with courage.\n";
-    LotR[2] = Spear_Front;
-
-    lotr_battle Sword_Keep;
-    Sword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
-            "Fortunately, you do. The battle goes well for you and Gimli. You help him lead the brawl in the inner keep, and the men of Rohan hold Helm's Deep through the siege.\n"
-            "For fighting with him valiantly, Gimli rewards you with his token, a stone medallion with a hammer on it. Gazing on it fills you with strength.\n";
-    LotR[3] = Sword_Keep;
-
-    lotr_battle notSword_Keep;
-    notSword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
-            "Unfortunately, you don't. The battle goes poorly for you and Gimli. The Urukhai wreak havoc in the inner keep, but men in other parts of the keep drive them off./n"
-            "No thanks to you, the men of Rohan hold Helm's Deep through the siege./n";
-    LotR[4] = notSword_Keep;
-
-    lotr_battle strSword_Keep;
-    Sword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
-            "You don't, but fortunately your strength allows you to use your " + user.weapon + " to great effect. You help him lead the brawl in the inner keep, and the men of Rohan hold Helm's Deep through the siege.\n"
-            "For fighting with him valiantly, Gimli rewards you with his token, a stone medallion with a hammer on it. Gazing on it fills you with strength.\n";
-    LotR[5] = Sword_Keep;
-
-    lotr_battle Bow_Walls;
-    Bow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
-            "You don't, but fortunately your strength allows you to use your " + user.weapon + " to great effect. You help him hold off Urukhai from the walls, and the men of Rohan hold Helm's Deep through the siege.\n"
-            "For fighting with him valiantly, Legolas rewards you with his token, a green gemstone medallion shaped like a leaf. Gazing on it fills you with calm.\n";
-    LotR[6] = Bow_Walls;
-
-    lotr_battle notBow_Walls;
-    notBow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
-            "Unfortunately, you don't. The battle goes poorly for you and Legolas. You serve no purpose on the castle walls, but men in other parts of the keep drive them off.\n"
-            "No thanks to you, the men of Rohan hold Helm's Deep through the siege.\n";
-    LotR[7] = notBow_Walls;
-
-    lotr_battle strBow_Walls;
-    Bow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
-            "'Good to see you, " + user.player_name + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
-            "Fortunately, you do. The battle goes well for you and Legolas. You help him shoot down Urukhai from the walls, and the men of Rohan hold Helm's Deep through the siege.\n"
-            "For fighting with him valiantly, Legolas rewards you with his token, a green gemstone medallion shaped like a leaf. Gazing on it fills you with calm.\n";
-    LotR[8] = Bow_Walls;
-
-    // Worlds have been constructed
-    // User begins to interact with them
     cout << "Help! Professor Hoenigman has built a super computer to open portals to the top Nerd Fandoms. She has sent her minions out to invade their Kingdoms and wreak havoc on the Nerd Universe." << endl;
     cout << "Your mission, should you choose to accept it, is to enter each of the worlds and complete a quest to restore order." << endl;
 
     cout << endl;
     cout << "Enter your name:" << endl;
     getline(cin, user_name);
-    user.player_name = user_name;
-
-    // Similar to past assignments, this menu gives access to all of the worlds 
+    user.setName(user_name);
+	
+	// Similar to past assignments, this menu gives access to all of the worlds 
     // If a mission is failed or completed it will return to this menu
     while (true) {
         cout << endl;
@@ -738,18 +447,18 @@ int main(int argc, char** argv) {
         getline(cin, user_command);
 
         switch (stoi(user_command)) {
-            // Harry Potter World
+			// Harry Potter World
             case 1:
             {
-                // If the user has already completed the quest they can't do it again
-                if (user.HP_Complete) {
+				// If the user has already completed the quest they can't do it again
+                if (user.getHP_Comp()) {
                     cout << "You've already completed this quest!" << endl;
                     break;
                 }
                 
                 // The user need to gather enough strength to access some of the doors. 
                 // Strength is initially set to 50
-                if (user.strength < 100) {
+                if (user.getStrength() < 100) {
                     cout << "You're not strong enough for this door yet! Try other quests first!" << endl;
                     break;
                 }
@@ -775,15 +484,15 @@ int main(int argc, char** argv) {
             // Hunger Games Arena
             case 2:
             {
-                // If already completed, can't compete again
-                if (user.HG_Complete) {
+				// If already completed, can't compete again
+                if (user.getHG_Comp()) {
                     cout << "You've already completed this quest!" << endl;
                     break;
                 }
                 // Keeps track of if they have died -> decides whether they go onto the next scenario
                 bool died = false;
                 // Need certain amount of strength to do this quest
-                if (user.strength < 100) {
+                if (user.getStrength() < 100) {
                     cout << "You're not strong enough for this door yet! Try other quests first!" << endl;
                     break;
                 }
@@ -801,15 +510,15 @@ int main(int argc, char** argv) {
                     cout << "Pick a valid number." << endl;
                     getline(cin, user_age);
                 }
-                // User's starting survival odd is calculated based on their district and age
+                 // User's starting survival odd is calculated based on their district and age
                 int startingSurvival = user.calcSurvival(stoi(user_district), stoi(user_age));
-                user.survivalOdd += startingSurvival;
+                user.setSurvivalOdd(startingSurvival);
                 HG_Situation currentScenario;
                 string user_answer;
                 // Iterates through the array 
                 // If their survival odd drops to zero or lower they die and are returned to the door menu
                 for (int i = 0; i < 6; i++) {
-                    if (user.survivalOdd <= 0) {
+                    if (user.getSurvivalOdd() <= 0) {
                         cout << "YOU DIED." << endl;
                         died = true;
                         break;
@@ -818,7 +527,7 @@ int main(int argc, char** argv) {
                     cout << currentScenario.scenario << endl;
                     getline(cin, user_answer);
                     int survivalScore = user.setSurvival(stoi(user_answer), currentScenario);
-                    user.survivalOdd += survivalScore;
+                    user.setSurvivalOdd(survivalScore);
                 }
                 // If they died return to menu
                 if(died){
@@ -838,15 +547,15 @@ int main(int argc, char** argv) {
             // Pokemon Universe
             case 3:
             {
-                // Can't battle again if already completed
-                if (user.poke_Complete) {
+				// Can't battle again if already completed
+                if (user.getpoke_Comp()) {
                     cout << "You've already completed this quest!" << endl;
                     break;
                 }
                 cout << endl;
                 cout << "You find yourself in a laboratory. Unfamiliar machines whir and buzz around you, and you see an elderly man in a labcoat and a boy of about 10 years across the room, discucssing something excitedly. " << endl;
                 cout << "They notice you and turn, and you see that the boy has a giant yellow mouse in his arms." << endl;
-                cout << "'Ah, " + user.player_name + " it's you!' The professor exclaims. 'I almost thought you wouldn't make it. Come, have a look. It's your turn to choose.'" << endl;
+                cout << "'Ah, " + user.getName() + " it's you!' The professor exclaims. 'I almost thought you wouldn't make it. Come, have a look. It's your turn to choose.'" << endl;
                 cout << "He gestures to a table behind him, where three more of the terrifying creatures sit:" << endl;
                 cout << "A green animal with a flower bud on its back, labeled 'Bulbasaur'," << endl;
                 cout << "a large orange lizard with a flame on the end of its tail, labeled 'Charmander'," << endl;
@@ -884,6 +593,7 @@ int main(int argc, char** argv) {
                     default:
                     {
                         cout << "Enter a valid number." << endl;
+                        getline(cin, user_poke);
                     }
                 }
 
@@ -905,6 +615,7 @@ int main(int argc, char** argv) {
                         }
                         if (stoi(user_answer) == current_battle.correct_move) {
                             cout << current_battle.correct_response << endl;
+                            user.evolvePokemon();
 
                         } else {
                             cout << current_battle.incorrect_response << endl;
@@ -922,6 +633,7 @@ int main(int argc, char** argv) {
                         }
                         if (stoi(user_answer) == current_battle.correct_move) {
                             cout << current_battle.correct_response << endl;
+                            user.evolvePokemon();
                         } else {
                             cout << current_battle.incorrect_response << endl;
                         }
@@ -935,6 +647,7 @@ int main(int argc, char** argv) {
                         while (stoi(user_answer) < 1 || stoi(user_answer) > 4) {
                             cout << "Enter a valid number." << endl;
                             getline(cin, user_answer);
+                            user.evolvePokemon();
                         }
                         if (stoi(user_answer) == current_battle.correct_move) {
                             cout << current_battle.correct_response << endl;
@@ -946,15 +659,15 @@ int main(int argc, char** argv) {
 
                 cout << endl;
                 cout << "'Wow, another great battle!' Says Ash." << endl;
-                cout << "With your new " + user.pokemon + " as a companion, you feel ready to take on more adventures." << endl;
+                cout << "With your new " + user.getPokemon() + " as a companion, you feel ready to take on more adventures." << endl;
                 cout << "You say goodbye to TA Matt, Professor Oak, and Ash, and leave the laboratory, but not before Oak gives you another clue: tada" << endl;
-                user.setpoke_Comp(user);
+                user.setpoke_Comp();
                 break;
             }
             case 4:
             {
-                // Can't do again if already completed
-                if (user.LOTR_Complete) {
+				// Can't do again if already completed
+                if (user.getLOTR_Comp()) {
                     cout << "You've already completed this quest!" << endl;
                     break;
                 }
@@ -966,7 +679,7 @@ int main(int argc, char** argv) {
                 cout << "A tall, slender, fair-skinned man strolls up beside the first. An elegant bow is strapped across his back." << endl;
                 cout << "'For once, I agree with the dwarf,' he states. 'Who are you? I've never seen you before.'" << endl;
                 cout << "'Please excuse the behavior of my companions,' says a strong, dark-haired man as he approaches. You feel a sense of power coming from this thrid man." << endl;
-                cout << "'This is " << user.player_name << ",' he says, gesturing to you.' " << user.player_name << " has been sent to aide us in the battle that lies before us.'" << endl;
+                cout << "'This is " << user.getName() << ",' he says, gesturing to you.' " << user.getName() << " has been sent to aide us in the battle that lies before us.'" << endl;
                 cout << "'These two are Legolas the elf,' he says, pointing to the tall, fair man, 'and Gimli the dwarf,' pointing to the short man with the beard." << endl;
                 cout << "'And I am Aragorn, son of Arathorn,' he states. 'And you had best get to the armory to find yourself a weapon.'" << endl;
 
@@ -1004,14 +717,15 @@ int main(int argc, char** argv) {
                     default:
                     {
                         cout << "Invalid selection." << endl;
+                        cin>>weapon_choice;
                     }
                 }
 
-                cout << "You know have a " << user.weapon << "!" << endl;
+                cout << "You know have a " << user.getWeapon() << "!" << endl;
                 user.setStrength(25);
 
                 cout << endl;
-                cout << "'Ah, the " << user.weapon << " , an excellent choice,' says a man behind you, dressed in glistening gold and green armor, with a golden horse across his chest." << endl;
+                cout << "'Ah, the " << user.getWeapon() << " , an excellent choice,' says a man behind you, dressed in glistening gold and green armor, with a golden horse across his chest." << endl;
                 cout << "'I am Theoden, king of Rohan,' he says, 'and king of this keep. I don't intend to lose it tonight, but I'll need your help for that." << endl;
                 cout << "I'll let you choose your own station, where you think you'll be of most use to us, based on your own skills,' he says." << endl;
                 cout << "'We need strong, fearless soldiers on the front lines, ready to hold off waves of enemies," << endl;
@@ -1035,7 +749,7 @@ int main(int argc, char** argv) {
                             outcome_battle = LotR[0];
                             cout << outcome_battle.outcome << endl;
                             user.setStrength(25);
-                        } else if (user.strength > 100) {
+                        } else if (user.getStrength() > 100) {
                             outcome_battle = LotR[2];
                             cout << outcome_battle.outcome << endl;
                             user.setStrength(25);
@@ -1050,7 +764,7 @@ int main(int argc, char** argv) {
                             outcome_battle = LotR[3];
                             cout << outcome_battle.outcome << endl;
                             user.setStrength(25);
-                        } else if (user.strength > 100) {
+                        } else if (user.getStrength() > 100) {
                             outcome_battle = LotR[5];
                             cout << outcome_battle.outcome << endl;
                             user.setStrength(25);
@@ -1065,7 +779,7 @@ int main(int argc, char** argv) {
                             outcome_battle = LotR[6];
                             cout << outcome_battle.outcome << endl;
                             user.setStrength(25);
-                        } else if (user.strength > 100) {
+                        } else if (user.getStrength() > 100) {
                             outcome_battle = LotR[8];
                             cout << outcome_battle.outcome << endl;
                             user.setStrength(25);
@@ -1082,7 +796,7 @@ int main(int argc, char** argv) {
                 }
 
                 cout << endl;
-                cout << "The armorers let you keep your " << user.weapon << " to use in your future adventures. You say your goodbyes to Aragorn, Legolas, Gimli, and Theoden." << endl;
+                cout << "The armorers let you keep your " << user.getWeapon() << " to use in your future adventures. You say your goodbyes to Aragorn, Legolas, Gimli, and Theoden." << endl;
                 cout << "King Theoden hands you another piece of the code before you go: nfu" << endl;
 
                 user.setLOTR_Comp();
