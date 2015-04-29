@@ -5,6 +5,8 @@ We are going to attempt to program a choose your own adventure game. It will com
 
 Dependencies:
 An advanced C++ compiler (c++11) to handle the stoi function
+For the potions riddle in the harry potter quest, here's a picture to make it a little easier to visualize:
+http://img1.wikia.nocookie.net/__cb20110906232228/harrypotter/images/e/e5/Potions_Riddle.png
 
 System Requirements: 
 No additonal requirements needed.
@@ -19,6 +21,6 @@ N/A
 Open issues/Bugs:
 Don't know how to implement chess game for harry potter chamber. 
 Can't link the header file to the driver file even when #include "Character.h" is used
-Some of the attributes won't update 
+It would be cool to have the picture for the potions riddle (link above) pop up in a new window when the player gets to that chamber
 
 
