@@ -19,8 +19,7 @@ Contributors:
 N/A
 
 Open issues/Bugs:
-Don't know how to implement chess game for harry potter chamber. 
-LotR world causes a crash upon returning to the menu.
+Don't know how to implement chess game for harry potter chamber.
 It would be cool to have the picture for the potions riddle (link above) pop up in a new window when the player gets to that chamber
 
 
