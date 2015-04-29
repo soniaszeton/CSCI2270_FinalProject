@@ -20,7 +20,7 @@ N/A
 
 Open issues/Bugs:
 Don't know how to implement chess game for harry potter chamber. 
-Can't link the header file to the driver file even when #include "Character.h" is used
+LotR world causes a crash upon returning to the menu.
 It would be cool to have the picture for the potions riddle (link above) pop up in a new window when the player gets to that chamber
 
 
