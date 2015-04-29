@@ -5,17 +5,11 @@
  * Created on April 23, 2015, 4:24 PM
  */
 
-//#include <cstdlib>
 #include <iostream>
-//#include <fstream>
 #include <string>
-//#include <vector>
-//#include <queue>
 #include "character.h"
 
 using namespace std;
-
-
 
 // Creating the node for the Harry Potter world array
 struct HP_Chamber {
@@ -236,11 +230,7 @@ int main(int argc, char** argv) {
 
     //constructing the pokemon world
     poke_battle Ash_grass;
-    Ash_grass.question = "\n'Wow! A " + user.getPokemon() + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
-            "'So, Professor Oak is giving you a Pokemon too! That's great!'\n"
-            "'We should have a battle!'\n"
-            "You send out your brand new " + user.getPokemon() + ", and Ash sends out his Pikachu.\n"
-
+    Ash_grass.question =
             "\nWhat move will you use? \n"
             "1. Spark- Electric type\n"
             "2. Mud Bomb- Ground type\n"
@@ -253,15 +243,8 @@ int main(int argc, char** argv) {
     Pokemon[0] = Ash_grass;
 
     poke_battle Rival_grass;
-    Rival_grass.question = "\n'That was a fun battle!' Ash exclaims.\n"
-            "The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'\n"
-            "'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'\n"
-            "'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA .\n"
-            "'Alright then, here's your Charmander,' says Professor Oak, handing him the Charmander.\n"
-            "Now let's battle, " + user.getName() + "!\n"
-            "You send out your " + user.getPokemon() + ", and TA Matt sends out his Charmander.\n"
-
-            "What move will " + user.getPokemon() + " use?\n"
+    Rival_grass.question =
+            "\nWhat move will you use?\n"
             "1. Tackle- Normal type\n"
             "2. Ember- Fire type\n"
             "3. Water Gun- Water type\n"
@@ -274,11 +257,7 @@ int main(int argc, char** argv) {
 
 
     poke_battle Ash_fire;
-    Ash_fire.question = "\n'Wow! A " + user.getPokemon() + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
-            "'So, Professor Oak is giving you a Pokemon too! That's great!'\n"
-            "'We should have a battle!'\n"
-            "You send out your brand new " + user.getPokemon() + ", and Ash sends out his Pikachu.\n"
-
+    Ash_fire.question =
             "\nWhat move will you use? \n"
             "1. Spark- Electric type\n"
             "2. Mud Bomb- Ground type\n"
@@ -291,15 +270,8 @@ int main(int argc, char** argv) {
     Pokemon[2] = Ash_fire;
 
     poke_battle Rival_fire;
-    Rival_fire.question = "\n'That was a fun battle!' Ash exclaims.\n"
-            "The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'\n"
-            "'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'\n"
-            "'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA Matt.\n"
-            "'Alright then, here's your Squirtle,' says Professor Oak, handing him the Squirtle.\n"
-            "Now let's battle, " + user.getName() + "!\n"
-            "You send out your " + user.getPokemon() + ", and TA Matt sends out his Squirtle.\n"
-
-            "What move will " + user.getPokemon() + " use?\n"
+    Rival_fire.question =
+            "\nWhat move will you use?\n"
             "1. Tackle- Normal type\n"
             "2. Ember- Fire type\n"
             "3. Water Gun- Water type\n"
@@ -312,11 +284,7 @@ int main(int argc, char** argv) {
 
 
     poke_battle Ash_water;
-    Ash_water.question = "\n'Wow! A " + user.getPokemon() + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly.\n"
-            "'So, Professor Oak is giving you a Pokemon too! That's great!'\n"
-            "'We should have a battle!'\n"
-            "You send out your brand new " + user.getPokemon() + ", and Ash sends out his Pikachu.\n"
-
+    Ash_water.question = 
             "\nWhat move will you use? \n"
             "1. Spark- Electric type\n"
             "2. Mud Bomb- Ground type\n"
@@ -329,15 +297,8 @@ int main(int argc, char** argv) {
     Pokemon[4] = Ash_water;
 
     poke_battle Rival_water;
-    Rival_water.question = "\n'That was a fun battle!' Ash exclaims.\n"
-            "The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'\n"
-            "'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'\n"
-            "'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA Matt.\n"
-            "'Alright then, here's your Bulbasaur,' says Professor Oak, handing him the Bulbasaur.\n"
-            "Now let's battle, " + user.getName() + "!\n"
-            "You send out your " + user.getPokemon() + ", and TA Matt sends out his Bulbasaur.\n"
-
-            "What move will " + user.getPokemon() + " use?\n"
+    Rival_water.question = 
+            "\nWhat move will you use?\n"
             "1. Tackle- Normal type\n"
             "2. Ember- Fire type\n"
             "3. Water Gun- Water type\n"
@@ -435,6 +396,8 @@ int main(int argc, char** argv) {
 	// Similar to past assignments, this menu gives access to all of the worlds 
     // If a mission is failed or completed it will return to this menu
     while (true) {
+		cout << "Enter to continue:" << endl;
+		cin.ignore();
         cout << endl;
         cout << "5 doors each emblazed with a different symbol are before you. Pick one to enter:" << endl;
         cout << "1. Lightning bolt" << endl;
@@ -466,6 +429,7 @@ int main(int argc, char** argv) {
                 string user_answer;
                 // Iterates through the Harry Potter array
                 // If they choose the correct answer they move on, if not they are kicked back to the door menu
+                bool wrong = false;
                 for (int i = 0; i < 6; i++) {
                     currentChamber = Harry_Potter[i];
                     cout << currentChamber.question << endl;
@@ -474,9 +438,13 @@ int main(int argc, char** argv) {
                         cout << currentChamber.correct_response << endl;
                     } else {
                         cout << "Wrong choice. You have failed to make it to the next chamber." << endl;
+                        wrong = true;
                         break;
                     }
                 }
+                if (wrong){
+					break;
+				}
                 // Quest complete. Set bool and return to door menu
                 user.setHP_Comp();
                 break;
@@ -600,12 +568,28 @@ int main(int argc, char** argv) {
                 cout << endl;
                 cout << "You now have a Pokemon!" << endl;
                 user.setStrength(25);
+                
+                cout<<endl;
+                cout<<"'Wow! A " + user.getPokemon() + "! That's so cool!' Says the boy with the yellow mouse. 'This is my Pikachu! And I'm Ash Ketchum!' He exclaims proudly."<<endl;
+                cout<<"'So, Professor Oak is giving you a Pokemon too! That's great!'"<<endl;
+                cout<<"'We should have a battle!'"<<endl;
+                cout<<"You send out your brand new " + user.getPokemon() + ", and Ash sends out his Pikachu."<<endl;
 
                 poke_battle current_battle;
                 string user_answer;
 
                 if (stoi(user_poke) == 1) {
                     for (int i = 0; i < 2; i++) {
+						if (i == 1){
+							cout<<endl;
+							cout<<"'That was a fun battle!' Ash exclaims."<<endl;
+							cout<<"The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'"<<endl;
+							cout<<"'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'"<<endl;
+							cout<<"'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA ."<<endl;
+							cout<<"'Alright then, here's your Charmander,' says Professor Oak, handing him the Charmander."<<endl;
+							cout<<"Now let's battle, " + user.getName() + "!"<<endl;
+							cout<<"You send out your " + user.getPokemon() + ", and TA Matt sends out his Charmander."<<endl;
+						}
                         current_battle = Pokemon[i];
                         cout << current_battle.question << endl;
                         getline(cin, user_answer);
@@ -617,13 +601,24 @@ int main(int argc, char** argv) {
                             cout << current_battle.correct_response << endl;
                             user.evolvePokemon();
 
-                        } else {
+                        }
+                        else {
                             cout << current_battle.incorrect_response << endl;
                         }
-                    }
+					}
                 }
                 else if(stoi(user_poke) == 2) {
                     for(int i = 2; i < 4; i++) {
+						if (i == 3){
+							cout<<endl;
+							cout<<"'That was a fun battle!' Ash exclaims."<<endl;
+							cout<<"The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'"<<endl;
+							cout<<"'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'"<<endl;
+							cout<<"'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA ."<<endl;
+							cout<<"'Alright then, here's your Squirtle,' says Professor Oak, handing him the Squirtle."<<endl;
+							cout<<"Now let's battle, " + user.getName() + "!"<<endl;
+							cout<<"You send out your " + user.getPokemon() + ", and TA Matt sends out his Squirtle."<<endl;
+						}
                         current_battle = Pokemon[i];
                         cout << current_battle.question << endl;
                         getline(cin, user_answer);
@@ -641,6 +636,16 @@ int main(int argc, char** argv) {
                 }
                 else if (stoi(user_poke) == 3) {
                     for (int i = 4; i < 6; i++) {
+						if (i == 5){
+							cout<<endl;
+							cout<<"'That was a fun battle!' Ash exclaims."<<endl;
+							cout<<"The door opens behind you and TA Matt walks in. Ash has an angry look on his face. 'Oh no,' he mutters, 'it's my rival, TA Matt!'"<<endl;
+							cout<<"'Oh good, now you're all here!' Says Professor Oak. 'Why don't you choose a Pokemon, TA Matt'"<<endl;
+							cout<<"'I'll take whatever is super-effective against " + user.getName() + "'s Pokemon, because that's just the type of guy I am,' says TA ."<<endl;
+							cout<<"'Alright then, here's your Bulbasaur,' says Professor Oak, handing him the Bulbasaur."<<endl;
+							cout<<"Now let's battle, " + user.getName() + "!"<<endl;
+							cout<<"You send out your " + user.getPokemon() + ", and TA Matt sends out his Bulbasaur."<<endl;
+						}
                         current_battle = Pokemon[i];
                         cout << current_battle.question << endl;
                         getline(cin, user_answer);
@@ -798,7 +803,6 @@ int main(int argc, char** argv) {
                 cout << endl;
                 cout << "The armorers let you keep your " << user.getWeapon() << " to use in your future adventures. You say your goodbyes to Aragorn, Legolas, Gimli, and Theoden." << endl;
                 cout << "King Theoden hands you another piece of the code before you go: nfu" << endl;
-
                 user.setLOTR_Comp();
                 break;
             }
