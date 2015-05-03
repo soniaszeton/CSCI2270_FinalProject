@@ -252,7 +252,7 @@ int main(int argc, char** argv) {
 
     Rival_grass.correct_move = 3;
     Rival_grass.correct_response = "\nYour move was super effective! Charmander was knocked out in one hit!\n";
-    Rival_grass.incorrect_response = "\nYour move wasn't very effective, Charmander countered and " + user.getPokemon() + " was knocked out in one hit!\n";
+    Rival_grass.incorrect_response = "\nYour move wasn't very effective, Charmander countered and your pokemon was knocked out in one hit!\n";
     Pokemon[1] = Rival_grass;
 
 
@@ -279,7 +279,7 @@ int main(int argc, char** argv) {
 
     Rival_fire.correct_move = 4;
     Rival_fire.correct_response = "\nYour move was super effective! Squirtle was knocked out in one hit!\n";
-    Rival_fire.incorrect_response = "\nYour move wasn't very effective, Squirtle countered and " + user.getPokemon() + " was knocked out in one hit!\n";
+    Rival_fire.incorrect_response = "\nYour move wasn't very effective, Squirtle countered and your pokemon was knocked out in one hit!\n";
     Pokemon[3] = Rival_fire;
 
 
@@ -306,70 +306,70 @@ int main(int argc, char** argv) {
 
     Rival_water.correct_move = 2;
     Rival_water.correct_response = "\nYour move was super effective! Bulbasaur was knocked out in one hit!\n";
-    Rival_water.incorrect_response = "\nYour move wasn't very effective, Bulbasaur countered and " + user.getPokemon() + " was knocked out in one hit!\n";
+    Rival_water.incorrect_response = "\nYour move wasn't very effective, Bulbasaur countered and your pokemon was knocked out in one hit!\n";
     Pokemon[5] = Rival_water;
 
     //building lotr battle outcomes
 
     lotr_battle Spear_Front;
     Spear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
+            "'Good to see you,' he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
             "Fortunately, you did. The battle goes well for you and Aragorn. You help him lead the men on the front lines, and the men of Rohan hold Helm's Deep through the siege.\n"
             "For fighting with him valiantly, Aragorn rewards you with his token, a golden medallion with a crown on it. Gazing on it fills you with courage.\n";
     LotR[0] = Spear_Front;
 
     lotr_battle notSpear_Front;
     notSpear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
+            "'Good to see you,' he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
             "Unfortunately, you didn't. The battle goes poorly for you and Aragorn. The Urukhai break through your front lines, but men in other parts of the keep drive them off.\n"
             "No thanks to you, the men of Rohan hold Helm's Deep through the siege.\n";
     LotR[1] = notSpear_Front;
 
     lotr_battle strSpear_Front;
     Spear_Front.outcome = "\nYou meet Aragorn on the front lines, leading the bravest defenders in battle."
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
-            "You didn't, but fortunately your strength allows you to use your " + user.getWeapon() + " to great effect. You help him lead the men on the front lines, and the men of Rohan hold Helm's Deep through the siege.\n"
+            "'Good to see you,' he says. 'I hope you brought a strong spear to hold off the Urukhai.'"
+            "You didn't, but fortunately your strength allows you to use your weapon to great effect. You help him lead the men on the front lines, and the men of Rohan hold Helm's Deep through the siege.\n"
             "For fighting with him valiantly, Aragorn rewards you with his token, a golden medallion with a crown on it. Gazing on it fills you with courage.\n";
     LotR[2] = Spear_Front;
 
     lotr_battle Sword_Keep;
     Sword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
+            "'Good to see you,' he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
             "Fortunately, you do. The battle goes well for you and Gimli. You help him lead the brawl in the inner keep, and the men of Rohan hold Helm's Deep through the siege.\n"
             "For fighting with him valiantly, Gimli rewards you with his token, a stone medallion with a hammer on it. Gazing on it fills you with strength.\n";
     LotR[3] = Sword_Keep;
 
     lotr_battle notSword_Keep;
     notSword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
+            "'Good to see you,' he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
             "Unfortunately, you don't. The battle goes poorly for you and Gimli. The Urukhai wreak havoc in the inner keep, but men in other parts of the keep drive them off./n"
             "No thanks to you, the men of Rohan hold Helm's Deep through the siege./n";
     LotR[4] = notSword_Keep;
 
     lotr_battle strSword_Keep;
     Sword_Keep.outcome = "\nYou meet Gimli in the inner keep, preparing the men for the melee.\n"
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
-            "You don't, but fortunately your strength allows you to use your " + user.getWeapon() + " to great effect. You help him lead the brawl in the inner keep, and the men of Rohan hold Helm's Deep through the siege.\n"
+            "'Good to see you,' he says. 'I hope you have a strong sword so you'll be ready for anything.'\n"
+            "You don't, but fortunately your strength allows you to use your weapon to great effect. You help him lead the brawl in the inner keep, and the men of Rohan hold Helm's Deep through the siege.\n"
             "For fighting with him valiantly, Gimli rewards you with his token, a stone medallion with a hammer on it. Gazing on it fills you with strength.\n";
     LotR[5] = Sword_Keep;
 
-    lotr_battle Bow_Walls;
-    Bow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
-            "You don't, but fortunately your strength allows you to use your " + user.getWeapon() + " to great effect. You help him hold off Urukhai from the walls, and the men of Rohan hold Helm's Deep through the siege.\n"
+    lotr_battle strBow_Walls;
+    strBow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
+            "'Good to see you,' he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
+            "You don't, but fortunately your strength allows you to use your weapon to great effect. You help him hold off Urukhai from the walls, and the men of Rohan hold Helm's Deep through the siege.\n"
             "For fighting with him valiantly, Legolas rewards you with his token, a green gemstone medallion shaped like a leaf. Gazing on it fills you with calm.\n";
-    LotR[6] = Bow_Walls;
+    LotR[6] = strBow_Walls;
 
     lotr_battle notBow_Walls;
     notBow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
+            "'Good to see you,' he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
             "Unfortunately, you don't. The battle goes poorly for you and Legolas. You serve no purpose on the castle walls, but men in other parts of the keep drive them off.\n"
             "No thanks to you, the men of Rohan hold Helm's Deep through the siege.\n";
     LotR[7] = notBow_Walls;
 
-    lotr_battle strBow_Walls;
+    lotr_battle Bow_Walls;
     Bow_Walls.outcome = "\nYou meet Legolas on the castle walls, preparing archers as the last line of defense.\n"
-            "'Good to see you, " + user.getName() + "', he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
+            "'Good to see you,' he says. 'I hope you have a taught bow to help pick off the enemy.'\n"
             "Fortunately, you do. The battle goes well for you and Legolas. You help him shoot down Urukhai from the walls, and the men of Rohan hold Helm's Deep through the siege.\n"
             "For fighting with him valiantly, Legolas rewards you with his token, a green gemstone medallion shaped like a leaf. Gazing on it fills you with calm.\n";
     LotR[8] = Bow_Walls;
@@ -396,7 +396,7 @@ int main(int argc, char** argv) {
 	// Similar to past assignments, this menu gives access to all of the worlds 
     // If a mission is failed or completed it will return to this menu
     while (true) {
-		cout << "Enter to continue:" << endl;
+		cout << "Press Enter to continue:" << endl;
 		cin.ignore();
         cout << endl;
         cout << "5 doors each emblazed with a different symbol are before you. Pick one to enter:" << endl;
@@ -760,6 +760,7 @@ int main(int argc, char** argv) {
                             user.setStrength(25);
                         } else {
                             outcome_battle = LotR[1];
+                            cout << outcome_battle.outcome << endl;
                         }
                         break;
                     }
@@ -775,21 +776,23 @@ int main(int argc, char** argv) {
                             user.setStrength(25);
                         } else {
                             outcome_battle = LotR[4];
+                            cout << outcome_battle.outcome << endl;
                         }
                         break;
                     }
                     case 3:
                     {
                         if (weapon_choice == 3) {
-                            outcome_battle = LotR[6];
+                            outcome_battle = LotR[8];
                             cout << outcome_battle.outcome << endl;
                             user.setStrength(25);
                         } else if (user.getStrength() > 100) {
-                            outcome_battle = LotR[8];
+                            outcome_battle = LotR[6];
                             cout << outcome_battle.outcome << endl;
                             user.setStrength(25);
                         } else {
                             outcome_battle = LotR[7];
+                            cout << outcome_battle.outcome << endl;
                         }
                         break;
                     }
